@@ -2,6 +2,7 @@
 // Augmentation the input with desired markup.
 // Render markdown.
 
+#include <gsl/gsl_assert>
 #include <gsl/gsl_util>
 
 #include <fstream>
@@ -17,14 +18,27 @@ std::string slurp(std::istream& in) {
     return s.str();
 }
 
+std::string slurp(std::string const& fname) {
+    std::ifstream in(fname);
+    if (!in) throw "can't read " + fname;
+    return slurp(in);
+}
+
 std::string to_html(std::string const& md) {
     auto const p = cmark_markdown_to_html(md.c_str(), md.size(), 0);
     auto const f = gsl::finally([p] { std::free(p); });
     return p;
 }
 
+std::string augment(std::string const& s) {
+    static std::string const dirname = GSL_STRINGIFY(DIRNAME);
+    static std::string const style = slurp(dirname + "/style.css");
+    static std::string const extra = slurp(dirname + "/extra.html");
+    return extra + "\n" + s + "\n\n<style>\n" + style + "</style>\n";
+}
+
 void convert(std::istream& in, std::ostream& out) {
-    out << to_html(slurp(in));
+    out << to_html(augment(slurp(in)));
 }
 
 int main(int argc, char** argv) try {

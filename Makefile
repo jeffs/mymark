@@ -1,12 +1,16 @@
 CXXFLAGS = -std=c++1z -pedantic -Wall -Wextra -Wno-c99-extensions -ftrapv -O3
-CPPFLAGS = -isystem $(HOME)/Documents/pkg/GSL/include
+CPPFLAGS = -isystem $(HOME)/Documents/pkg/GSL/include -DDIRNAME="$(PWD)"
 LDFLAGS = -lcmark
+
+TARGET = $(HOME)/bin/mymark
 
 main: main.o
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
-install: main
-	cp $< $(HOME)/bin/mymark
+install: $(TARGET)
+
+$(TARGET): main
+	cp $< $@
 
 main.s: main.cpp
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -S -o $@ $<
