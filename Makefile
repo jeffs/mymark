@@ -1,6 +1,6 @@
 CXXFLAGS = -std=c++1z -pedantic -Wall -Wextra -Wno-c99-extensions -ftrapv -O3
 CPPFLAGS = -isystem $(HOME)/Documents/pkg/GSL/include -DDIRNAME="$(PWD)"
-LDFLAGS = -lcmark
+LDFLAGS = -lboost_filesystem -lboost_system -lcmark
 
 TARGET = $(HOME)/bin/mymark
 
@@ -36,4 +36,3 @@ run: main
 .PHONY: test
 test: main
 	./main
-

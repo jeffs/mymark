@@ -1,6 +1,8 @@
 // Read the input file.
-// Augmentation the input with desired markup.
+// Augment the input with desired markup.
 // Render markdown.
+
+#include <boost/filesystem.hpp>
 
 #include <gsl/gsl_assert>
 #include <gsl/gsl_util>
