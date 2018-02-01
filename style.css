@@ -1,6 +1,17 @@
+a, a:visited {
+    color: #CCF;
+    text-decoration: none;
+    font-weight: normal;
+}
+
 blockquote {
     border-left: 2px solid lightblue;
     font-style: italic;
     margin-left: 8px;
     padding-left: 8px;
+}
+
+body {
+    background-color: #333;
+    color: #CCC;
 }
