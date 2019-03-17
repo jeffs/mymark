@@ -1,6 +1,6 @@
 CXXFLAGS = -std=c++1z -pedantic -Wall -Wextra -Wno-c99-extensions -ftrapv -O3
-CPPFLAGS = -isystem $(HOME)/opt/gsl/include -DDIRNAME="$(PWD)"
-LDFLAGS = -lboost_filesystem -lboost_system -lcmark
+CPPFLAGS = -isystem /brew/include -isystem $(HOME)/opt/gsl/include -DDIRNAME="$(PWD)"
+LDFLAGS = -L /brew/lib -lboost_filesystem -lboost_system -lcmark
 
 TARGET = $(HOME)/bin/mymark
 
